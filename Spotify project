@@ -1,0 +1,36 @@
+#1  Who are the top 10 artists based on popularity?
+SELECT artist_name popularity 
+FROM BIT_DB.Spotifydata
+LIMIT 10;
+
+
+#2 What artist released the longest song?
+SELECT artist_name, MAX(duration_ms) AS max_duration
+FROM BIT_DB.Spotifydata;
+
+
+#3 What's the average danceability for the 10 most popular songs? 
+SELECT track_name, popularity, AVG(danceability) AS average_danceability
+FROM BIT_DB.Spotifydata
+WHERE popularity > 90
+GROUP BY track_name
+LIMIT 10;
+
+
+#4 What is the average energy and tempo for songs that start with the letter B?
+SELECT track_name, AVG(energy) AS average_energy, AVG(tempo) AS average_tempo
+FROM BIT_DB.Spotifydata
+WHERE track_name LIKE 'B%'
+GROUP BY track_name;
+
+
+#5 Which artists have a popularity above 90 and a valence under 0.6?
+SELECT artist_name, popularity, valence
+FROM BIT_DB.Spotifydata
+WHERE popularity > 90 AND valence < 0.6;
+
+
+#6 Which Doja Cat song had a popularity over 90 and a liveness under 0.1?
+SELECT artist_name, track_name, popularity, liveness
+FROM BIT_DB.Spotifydata
+WHERE artist_name = 'Doja Cat' AND popularity > 90 AND liveness < 0.1;
